@@ -1,34 +1,46 @@
 package com.example.BankApp.entity;
 
+import com.example.BankApp.dto.TransactionDto;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 
-    @Column(nullable = false, length = 255)
     private String description;
 
 
-    @Column(nullable = false)
-    private double amount;
+    private BigDecimal amount;
 
 
-    @Column(nullable = false)
-    private LocalDateTime transactionTime;
+    private LocalDate transactionTime;
 
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+//    @JoinColumn(name = "account_id")
     private Account account;
+
+    public TransactionDto toTransactionDto(){
+        return TransactionDto.builder()
+                .description(description)
+                .amount(amount)
+                .transactionTime(transactionTime)
+                .account(account)
+                .build();
+    }
+
+
 }
