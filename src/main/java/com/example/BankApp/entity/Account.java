@@ -1,24 +1,33 @@
 package com.example.BankApp.entity;
 
+import com.example.BankApp.dto.AccountDto;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.math.BigDecimal;
 
 
-
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
-    @Column(unique = true,nullable = false)
+    private Long id;
+
     private String accountNumber;
 
-    @Column(nullable = false)
-    private double balance;
+    private BigDecimal balance;
+
+    public AccountDto toAccountDto(){
+        return AccountDto.builder()
+                .accountNumber(accountNumber)
+                .balance(balance)
+                .build();
+    }
+
+
 }
