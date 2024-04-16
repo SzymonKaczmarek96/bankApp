@@ -6,12 +6,11 @@ import com.example.BankApp.dto.TransactionDto;
 import com.example.BankApp.entity.Transaction;
 import com.example.BankApp.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,5 +47,16 @@ public class TransactionController {
         List<TransactionDto> transactionDtoList = transactionService.getAllTransactionsByTransactionTime(transactionTime);
         return ResponseEntity.ok(transactionDtoList);
     }
+
+
+    @PostMapping("/create")
+    public ResponseEntity<TransactionDto> createTransaction
+            (
+             @RequestBody TransactionDto transactionDto){
+        TransactionDto createdTransaction = transactionService.createTransactions(transactionDto);
+        return ResponseEntity.ok().body(createdTransaction);
+    }
+
+
 }
 

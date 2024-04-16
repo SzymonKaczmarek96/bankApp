@@ -18,15 +18,9 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
 
     private TransactionRepository transactionRepository;
-    private AccountRepository accountRepository;
 
-    private AccountServiceImpl accountService;
-
-
-    public TransactionServiceImpl(TransactionRepository transactionRepository, AccountRepository accountRepository, AccountServiceImpl accountService) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
-        this.accountRepository = accountRepository;
-        this.accountService = accountService;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.BankApp.services;
 
 import com.example.BankApp.dto.AccountDto;
+import com.example.BankApp.repositories.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
